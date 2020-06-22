@@ -14,9 +14,4 @@
         android:title="@string/dot_menu_new_random_team"
         app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/toggle_beacon_app"
-        android:title="@string/dot_menu_toggle_beacon_app"
-        app:showAsAction="never"/>
-
 </menu>

@@ -79,7 +79,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.pokemonPic);
         holder.pokemonName.setText("Name: " + capitalizeFirstLetter(mPokemon.get(position).getName()));
-        holder.level.setText("Level: 34");
+        holder.level.setText("Species Number: "+ mPokemon.get(position).getId());
         holder.pokemonTypes.setText("Types: " + typesString);
 
         // set onclick listener to start detail view and send data for clicked pokemon
@@ -121,7 +121,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             super(itemView);
             pokemonPic = itemView.findViewById(R.id.main_imageview);
             pokemonName = itemView.findViewById(R.id.name_textview);
-            level = itemView.findViewById(R.id.level_textview);
+            level = itemView.findViewById(R.id.number_textview);
             pokemonTypes = itemView.findViewById(R.id.types_textview);
             listItemLayout = itemView.findViewById(R.id.pokemonlist_layout);
         }

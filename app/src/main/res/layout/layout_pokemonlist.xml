@@ -30,11 +30,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/level_textview"
+        android:id="@+id/number_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sniglet"
-        android:text="Level 34"
+        android:text="Species Number: 1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/types_textview"
         app:layout_constraintStart_toStartOf="@+id/name_textview"
@@ -49,5 +49,5 @@
         android:text="Types: Grass, Poison"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/level_textview" />
+        app:layout_constraintStart_toStartOf="@+id/name_textview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -117,11 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
                 toast.show();
                 break;
-
-            case R.id.toggle_beacon_app:
-                // send notification
-
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
