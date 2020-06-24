@@ -13,6 +13,8 @@
         android:layout_marginStart="12dp"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/pokeball" />
@@ -26,6 +28,8 @@
         android:fontFamily="@font/sniglet"
         android:text="Name: Bulbasaur"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/main_imageview"
         app:layout_constraintTop_toTopOf="parent" />
 
