@@ -78,7 +78,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.pokemonPic);
-        holder.pokemonName.setText("Name: " + capitalizeFirstLetter(mPokemon.get(position).getName()));
+        holder.pokemonName.setText(capitalizeFirstLetter(mPokemon.get(position).getName()));
         holder.level.setText("Species Number: "+ mPokemon.get(position).getId());
         holder.pokemonTypes.setText("Types: " + typesString);
 

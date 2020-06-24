@@ -8,12 +8,12 @@
 
     <ImageView
         android:id="@+id/main_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="114dp"
+        android:layout_height="115dp"
         android:layout_marginStart="12dp"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,14 +23,13 @@
         android:id="@+id/name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/sniglet"
-        android:text="Name: Bulbasaur"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="Bulbasaur"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/main_imageview"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -51,7 +50,14 @@
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/sniglet"
         android:text="Types: Grass, Poison"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/name_textview" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.34" />
 </androidx.constraintlayout.widget.ConstraintLayout>
