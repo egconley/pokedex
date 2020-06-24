@@ -20,8 +20,8 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.egconley.pokemonAPI.PokemonAPIService;
-import com.egconley.pokemonAPI.models.Pokemon;
-import com.egconley.pokemonAPI.models.Type;
+import com.egconley.pokemonAPI.models.pokemon.Pokemon;
+import com.egconley.pokemonAPI.models.pokemon.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     // REQ 5 Connect Pokedex Client App to The open Pokemon API using Retro fit
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/pokemon/")
+            .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private PokemonAPIService pokemonAPIService = retrofit.create(PokemonAPIService.class);
+
+    //
 
     private List<Pokemon> team = new ArrayList<>();
     private boolean newTeamRequested = false;
@@ -160,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
     // REQ 5.2 Fetch the pokemon using those pokemon_numbers to call the endpoint https://pokeapi.co/api/v2/pokemon/{pokemon_number}/
     private void getPokemon(int number) {
-        Call<Pokemon> call = pokemonAPIService.getPokemonBySpeciesNumber(""+number);
+        Call<Pokemon> call = pokemonAPIService.getByNumber(""+number, "pokemon");
         call.enqueue(new Callback<Pokemon>() {
             @Override
             public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {

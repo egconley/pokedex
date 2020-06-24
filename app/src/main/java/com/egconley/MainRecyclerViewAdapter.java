@@ -14,11 +14,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.egconley.pokemonAPI.models.Ability;
-import com.egconley.pokemonAPI.models.Move;
-import com.egconley.pokemonAPI.models.Sprites;
-import com.egconley.pokemonAPI.models.Type;
-import com.egconley.pokemonAPI.models.Pokemon;
+import com.egconley.pokemonAPI.models.pokemon.Ability;
+import com.egconley.pokemonAPI.models.pokemon.Move;
+import com.egconley.pokemonAPI.models.pokemon.Sprites;
+import com.egconley.pokemonAPI.models.pokemon.Type;
+import com.egconley.pokemonAPI.models.pokemon.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;

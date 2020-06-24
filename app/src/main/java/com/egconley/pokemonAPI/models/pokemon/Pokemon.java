@@ -1,4 +1,4 @@
-package com.egconley.pokemonAPI.models;
+package com.egconley.pokemonAPI.models.pokemon;
 
 import java.util.ArrayList;
 

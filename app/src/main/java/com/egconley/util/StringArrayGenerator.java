@@ -1,8 +1,8 @@
 package com.egconley.util;
 
-import com.egconley.pokemonAPI.models.Ability;
-import com.egconley.pokemonAPI.models.Move;
-import com.egconley.pokemonAPI.models.Type;
+import com.egconley.pokemonAPI.models.pokemon.Ability;
+import com.egconley.pokemonAPI.models.pokemon.Move;
+import com.egconley.pokemonAPI.models.pokemon.Type;
 
 import java.util.ArrayList;
 
