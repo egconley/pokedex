@@ -21,7 +21,7 @@ public class StringArrayGenerator {
     public static ArrayList<String> getMovesStringArray(ArrayList<Move> moveArray) {
         ArrayList<String> stringArray = new ArrayList<>();
         for (Move m : moveArray) {
-            stringArray.add(m.getMove().getName());
+            stringArray.add(m.getMove().getName() + ": " + m.getMove().getShortEffect());
         }
         return stringArray;
     }

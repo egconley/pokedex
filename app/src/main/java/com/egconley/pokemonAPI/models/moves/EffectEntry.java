@@ -2,8 +2,8 @@ package com.egconley.pokemonAPI.models.moves;
 
 public class EffectEntry {
 
-    String effect;
-    String short_effect;
+    private String effect;
+    private String short_effect;
 
     public EffectEntry(String effect, String short_effect) {
         this.effect = effect;

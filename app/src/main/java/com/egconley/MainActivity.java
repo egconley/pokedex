@@ -20,6 +20,9 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.egconley.pokemonAPI.PokemonAPIService;
+import com.egconley.pokemonAPI.models.moves.EffectEntry;
+import com.egconley.pokemonAPI.models.moves.MoveDetail;
+import com.egconley.pokemonAPI.models.pokemon.Move;
 import com.egconley.pokemonAPI.models.pokemon.Pokemon;
 import com.egconley.pokemonAPI.models.pokemon.Type;
 
@@ -43,14 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    // REQ 5 Connect Pokedex Client App to The open Pokemon API using Retro fit
+    // connect to pokemon api
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private PokemonAPIService pokemonAPIService = retrofit.create(PokemonAPIService.class);
-
-    //
 
     private List<Pokemon> team = new ArrayList<>();
     private boolean newTeamRequested = false;
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    // REQ 6 Bonus Feature: Implement a menu with two options.
+    // menu item generates new team and sends a welcome toast
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // filters recycler view by entered text in search bar
     private void filter(String text) {
         ArrayList<Pokemon> filteredList = new ArrayList();
 
@@ -149,20 +151,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    // REQ 5
-    // REQ 5.1 Generate a list of 7 random different numbers between 1-151. These numbers corresponds to pokemon_numbers
+    // generates a list of 7 random different numbers between 1-151, corresponding to pokemon numbers
     private void getTeam() {
         Set<Integer> set = getRandomNumberSet();
-        // clean new team list each time to allow for serial clicks on "Generate New Random Team"
+        // clear new team list each time to allow for serial clicks on "Generate New Random Team"
         team.clear();
         for (Integer i : set) {
             getPokemon(i);
         }
     }
 
-    // REQ 5.2 Fetch the pokemon using those pokemon_numbers to call the endpoint https://pokeapi.co/api/v2/pokemon/{pokemon_number}/
+    // fetches pokemon using random numbers from getTeam()
     private void getPokemon(int number) {
-        Call<Pokemon> call = pokemonAPIService.getByNumber(""+number, "pokemon");
+        Call<Pokemon> call = pokemonAPIService.getPokemonByNameOrNumber(""+number, "pokemon");
         call.enqueue(new Callback<Pokemon>() {
             @Override
             public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
@@ -172,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Pokemon pokemon = response.body();
+                // calls api at move endpoint to populate pokemon moves with move effect details
+                populateMoveEffects(pokemon);
                 team.add(pokemon);
                 if (newTeamRequested==false) {
                     initRecyclerView();
@@ -186,6 +189,40 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Oh no!!! " + t.getMessage());
             }
         });
+    }
+
+    // fetches moves from the moves endpoint to get effect info for each pokemon, notifies adapter to update data
+    private void populateMoveEffects(final Pokemon poke) {
+        ArrayList<Move> moves = poke.getMoves();
+
+        for (final Move move : moves) {
+            String name = move.getMove().getName();
+            Call<MoveDetail> call = pokemonAPIService.getMoveByNameOrNumber(name, "move");
+            call.enqueue(new Callback<MoveDetail>() {
+                @Override
+                public void onResponse(Call<MoveDetail> call, Response<MoveDetail> response) {
+                    if (!response.isSuccessful()) {
+                        Log.d(TAG, "Response Code: " + response.code());
+                        return;
+                    }
+
+                    MoveDetail moveDetail = response.body();
+                    ArrayList<EffectEntry> effects = moveDetail.getEffectEntries();
+                    for (EffectEntry entry : effects) {
+                        move.getMove().setEffect(entry.getEffect());
+                        move.getMove().setShortEffect(entry.getShort_effect());
+                    }
+
+                    // notifies recycler view adapter that data has changed to avoid null effect values in detail view
+                    adapter.newList((ArrayList<Pokemon>) team);
+                }
+
+                @Override
+                public void onFailure(Call<MoveDetail> call, Throwable t) {
+                    Log.d(TAG, "Oh no!!! Moves call didn't work." + t.getMessage());
+                }
+            });
+        }
     }
 
 }
